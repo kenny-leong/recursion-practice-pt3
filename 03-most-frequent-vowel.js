@@ -101,9 +101,22 @@ const mostFrequentVowel = function (words, counter = {}) {
 
 }
 
-words = []
-counter = {}
-console.log(mostFrequentVowel(words, counter))
+const mostFrequentVowel = (words, counter = {}) => {
+
+  if (!words.length) {
+    let highestCount = 0, mostFrequentVowel = '';
+    Object.entries(counter).forEach(kVPair => {
+      if (kVPair[1] > highestCount) mostFrequentVowel = kVPair[0], highestCount = kVPair[1]
+    })
+    return mostFrequentVowel
+  }
+
+  for (let letter of words.pop()) {
+    if (VOWELS.includes(letter)) counter[letter] = counter[letter] + 1 || 1
+  }
+
+  return mostFrequentVowel(words, counter)
+}
 
 
 
